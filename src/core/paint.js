@@ -13,6 +13,7 @@ function Paint (config) {
   this._tempPositions = null
   this._killCoordinate = null
   this.active = true
+  this.drawEnd = config.drawEnd ? config.drawEnd : function() {}
   
   this._tempDatasource = {
     name: 'tempCollection',
@@ -182,6 +183,9 @@ Paint.prototype._stopDrawing = function() {
   
   this.dataCollection.geos.push(this._tempPolygon)
   this.map.refresh()
+  
+  // 执行绘制完毕方法
+  this.drawEnd(this._tempPolygon)
 }
 
 Paint.prototype._continuesToDrawing = function(evt) {
