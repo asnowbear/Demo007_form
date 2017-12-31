@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>出题以及编辑</title>
+</head>
+
+<style>
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 18px;
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        padding: 12px 32px;
+        margin: 4px 2px;
+    }
+
+</style>
+<body>
+
+<div style="">
+    <button id="saveBtn" class="button"> 保存</button>
+    <button id="editBtn" class="button"> 编辑</button>
+</div>
+
+<div id="workMap">
+    <canvas id="can" ></canvas>
+</div>
+</body>
+
+<script src="lib/jquery.min.js"></script>
+<script src="src/core/Config.js"></script>
+<script src="src/core/event.js"></script>
+<script src="src/core/myimage.js"></script>
+<script src="src/core/mypolygon.js"></script>
+<script src="src/core/nav.js"></script>
+<script src="src/core/paint.js"></script>
+<script src="src/core/workmap.js"></script>
+<script src="src/core/data.js"></script>
+<script src="src/common.js"></script>
+<script src="src/main.js"></script>
+
+<script>
+
+  /**
+   * 示例数据：
+   *
+   * 数据需要从数据库获取
+   *
+   */
+    var data = '{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"polygon","coordinates":[[591,163],[441,249],[563,351],[707,323],[717,245],[691,181],[591,163]]},"properties":{}},{"type":"Feature","geometry":{"type":"polygon","coordinates":[[285,275],[177,383],[287,455],[443,371],[405,277],[367,235],[285,275]]},"properties":{}}]}'
+    var url = 'asset/dunk.jpg'
+
+    /**
+     * 初始化绘图引擎
+     * 如果携带数据源，则会渲染数据
+     *
+     *  三种模式：
+     *  1、init (url, null) ：初始化进来，显示图片 （老师出题）
+     *  2、init (url, JSON.parse(data), true) ： 携带数据源初始化，显示图片，显示图形 （老师编辑图形）
+     *
+     */
+//    init (url, JSON.parse(data)) // 初始化，携带数据并初始显示图形
+     init (url, null) // 初始化，老师开始绘制
+</script>
+
+</html>

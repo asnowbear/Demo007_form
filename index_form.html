@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>出题以及编辑</title>
+</head>
+
+<style>
+    .button {
+        background-color: #ffc600;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        padding: 7px 20px;
+        margin: 4px 2px;
+        border-radius: 3px;
+    }
+
+    .popup {
+        position: absolute;
+        background-color: #fff;
+        left:100px;
+        top:411px;
+        width:410px;
+        height:270px;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: 6px;
+        box-shadow: 0 5px 10px rgba(255,198,0,.2);
+    }
+
+    .popup >h3 {
+        background-color: #f7f7f7;
+        border-radius: 6px;
+        border-bottom: 1px solid #ebebeb;
+        font-size: 16px;
+        padding: 8px 14px;
+        margin: 0;
+    }
+
+    .radio {
+        background-color: #337ab7;
+        display: inline;
+        margin: 5px 5px;
+        padding: 8px 10px;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+
+    .radio > label {
+        color: #fff;
+    }
+
+</style>
+<body>
+
+<!--<div style="">-->
+    <!--<button id="saveBtn" class="button"> 保存</button>-->
+    <!--<button id="editBtn" class="button"> 编辑</button>-->
+<!--</div>-->
+
+<div id="workMap">
+    <canvas id="can" ></canvas>
+
+    <!--表单模块-->
+    <div id="popupDiv" class="popup">
+        <h3> 街景车尾标注 </h3>
+        <div id="content" style="padding: 15px 1px">
+            <div style="padding: 5px 5px;height: 45px;border-bottom: 1px solid #ebebeb">
+                <div class="radio" >
+                    <input id="carChk" type="radio" name="menu" value="car">
+                    <label for="carChk">汽车</label>
+                </div>
+
+                <div class="radio">
+                    <input id="pepChk" type="radio" name="menu" value="passerby">
+                    <label for="pepChk">行人</label>
+                </div>
+
+                <div class="radio">
+                    <input id="qicheChk" type="radio" name="menu" value="rider">
+                    <label for="qicheChk">骑车人</label>
+                </div>
+            </div>
+
+            <div style="margin-top:10px;padding: 5px 5px">
+                <div>
+                    <div class="radio">
+                        <input id="smallcarChk" type="radio" name="submenu" value="smallcar">
+                        <label for="smallcarChk">轿车</label>
+                    </div>
+
+                    <div class="radio">
+                        <input id="truckChk" type="radio" name="submenu" value="truck">
+                        <label for="truckChk">卡车</label>
+                    </div>
+
+                    <div class="radio">
+                        <input id="busChk" type="radio" name="submenu" value="bus">
+                        <label for="busChk">公交车</label>
+                    </div>
+
+                    <div class="radio">
+                        <input id="vanChk" type="radio" name="submenu" value="van">
+                        <label for="vanChk">厢式货车</label>
+                    </div>
+                </div>
+                <div style="margin-top:20px;">
+                    <div class="radio">
+                        <input id="pickupChk" type="radio" name="submenu" value="pickup">
+                        <label for="pickupChk">皮卡</label>
+                    </div>
+
+                    <div class="radio">
+                        <input id="otherChk" type="radio" name="submenu" value="other">
+                        <label for="otherChk">其他</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="buttons" style="margin-top: 25px;text-align: center">
+                <input type="button" class="button" value="保存">
+                <input type="button" class="button" value="取消">
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="lib/jquery.min.js"></script>
+<script src="src/core/Config.js"></script>
+<script src="src/core/event.js"></script>
+<script src="src/core/myimage.js"></script>
+<script src="src/core/mypolygon.js"></script>
+<script src="src/core/nav.js"></script>
+<script src="src/core/paint.js"></script>
+<script src="src/core/workmap.js"></script>
+<script src="src/core/data.js"></script>
+<script src="src/common.js"></script>
+<script src="src/main.js"></script>
+
+<script>
+
+  /**
+   * 示例数据：
+   *
+   * 数据需要从数据库获取
+   */
+  var url = 'asset/dunk.jpg'
+
+  /**
+   * 初始化绘图引擎
+   * 如果携带数据源，则会渲染数据
+   *
+   *  三种模式：
+   */
+  init (url, null)
+</script>
+
+</html>

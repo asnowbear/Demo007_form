@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>考试页面</title>
+</head>
+
+<style>
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 18px;
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        padding: 12px 32px;
+        margin: 4px 2px;
+    }
+
+</style>
+<body>
+
+<div style="">
+    <button id="nextBtn" class="button"> 下一条</button>
+</div>
+
+<div id="workMap">
+    <canvas id="can" ></canvas>
+</div>
+</body>
+
+<!--注意引用的js文件不同-->
+<script src="lib/jquery.min.js"></script>
+<script src="src/core/Config.js"></script>
+<script src="src/core/event.js"></script>
+<script src="src/core/myimage.js"></script>
+<script src="src/core/mypolygon.js"></script>
+<script src="src/core/nav.js"></script>
+<script src="src/core/paintMark.js"></script>
+<script src="src/core/workmap.js"></script>
+<script src="src/core/data.js"></script>
+<script src="src/main_test.js"></script>
+
+<script>
+
+    /**
+     * 示例数据：
+     *
+     * 数据需要从数据库获取
+     *
+     */
+    var data = '{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"polygon","coordinates":[[591,163],[441,249],[563,351],[707,323],[717,245],[691,181],[591,163]]},"properties":{}},{"type":"Feature","geometry":{"type":"polygon","coordinates":[[285,275],[177,383],[287,455],[443,371],[405,277],[367,235],[285,275]]},"properties":{}}]}'
+
+    // 示例图片
+    var url = 'asset/dunk.jpg'
+
+    /**
+     * 初始化绘图引擎
+     * 如果携带数据源，则会渲染数据
+     *
+     *  三种模式：
+     *  3、init (url, JSON.parse(data), false)： 携带数据源初始化，显示图片，不显示图形 （学生答题）
+     *
+     */
+     init (url, JSON.parse(data), true) // 注意这里最后一个参数是true，为了演示答题效果，正式环境请设置为false
+</script>
+
+</html>
