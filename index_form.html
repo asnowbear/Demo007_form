@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>出题以及编辑</title>
+    <title></title>
 </head>
 
 <style>
@@ -20,6 +20,20 @@
         border-radius: 3px;
     }
 
+    .buttonGroup {
+        background-color: green;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        padding: 10px 30px;
+        margin: 4px 2px;
+        border-radius: 3px;
+    }
+
     .popup {
         position: absolute;
         background-color: #fff;
@@ -30,6 +44,7 @@
         border: 1px solid rgba(0,0,0,.2);
         border-radius: 6px;
         box-shadow: 0 5px 10px rgba(255,198,0,.2);
+        display:none;
     }
 
     .popup >h3 {
@@ -57,10 +72,11 @@
 </style>
 <body>
 
-<!--<div style="">-->
-    <!--<button id="saveBtn" class="button"> 保存</button>-->
-    <!--<button id="editBtn" class="button"> 编辑</button>-->
-<!--</div>-->
+<div style="">
+    <button id="paintBtn" class="buttonGroup"> 绘制</button>
+    <button id="editBtn" class="buttonGroup"> 编辑</button>
+    <button id="saveBtn" class="buttonGroup"> 保存</button>
+</div>
 
 <div id="workMap">
     <canvas id="can" ></canvas>
@@ -86,7 +102,7 @@
                 </div>
             </div>
 
-            <div style="margin-top:10px;padding: 5px 5px">
+            <div id="carContentDiv" style="margin-top:10px;padding: 5px 5px">
                 <div>
                     <div class="radio">
                         <input id="smallcarChk" type="radio" name="submenu" value="smallcar">
@@ -122,7 +138,7 @@
             </div>
 
             <div id="buttons" style="margin-top: 25px;text-align: center">
-                <input id="saveBtn" type="button" class="button" value="保存">
+                <input id="submitBtn" type="button" class="button" value="确认">
                 <input id="cancelBtn" type="button" class="button" value="取消">
             </div>
 

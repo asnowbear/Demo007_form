@@ -15,6 +15,7 @@ function WrokMap (config) {
   this.context = this.canvasDom.getContext('2d')
   this.tools = []
   this.center = null
+  this.matrix = null
   this.datasource = []
   this._addEventsToMap()
 
@@ -102,6 +103,9 @@ WrokMap.prototype.addTools = function(tools) {
 
 WrokMap.prototype._handleEvent = function (e) {
   var event = this.coordinateMapping(e)
+  if (event === null) {
+    return
+  }
 
   var ts = this.tools,
       len = ts.length;
@@ -197,6 +201,10 @@ WrokMap.prototype.coordinateMapping = function (origE) {
 
   var x = srcreePosition[0]
   var y = srcreePosition[1]
+  
+  if (this.matrix === null) {
+    return null
+  }
   
   var mt = this.matrix.coordinate
   

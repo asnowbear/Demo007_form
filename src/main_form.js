@@ -1,5 +1,6 @@
 
 var currentSelectedGeo = null,// 当前点击选中的图形
+  currentGeo = null,
   workMap = null,
   dataCollection = null,
   paint = null,
@@ -78,7 +79,7 @@ function init (url, datasource, allGeoDisplay) {
    * 初始化表单
    * @type {Popup}
    */
-  popup = new Popup(workMap)
+  popup = new Popup(workMap, {onSubmitEnd: onSubmitEnd, onCancelEnd: onCancelEnd})
 }
 
 /**
@@ -87,6 +88,42 @@ function init (url, datasource, allGeoDisplay) {
  */
 function drawEnd (e) {
   popup.show()
+  currentGeo = e
+}
+
+/**
+ * 表单点击确认执行的回调函数
+ * @param data 表单数据
+ */
+function onSubmitEnd (data) {
+  if (data) {
+    currentGeo.feature = {
+      type: data.type,
+      subType: data.subType
+    }
+  }
+  
+  popup.hide()
+}
+
+/**
+ * 表单点击取消执行的回调函数
+ * @param data
+ */
+function onCancelEnd () {
+  
+}
+
+/**
+ * 选择完毕的执行函数
+ */
+function onSelectedEnd() {
+  if (!currentGeo) {
+    return
+  }
+  
+  popup.show()
+  popup.fillData(currentGeo.feature)
 }
 
 /**
@@ -117,6 +154,70 @@ function resizeCanvas() {
   $("#can").attr("width", width)
   $("#can").attr("height", height)
 }
+
+/**
+ * 点击后生成json格式数据
+ */
+$('#saveBtn').click(function(e){
+  var geos = dataCollection.geos
+  var resultJson = data.serialize(geos)
+  var resultStr = JSON.stringify(resultJson)
+  console.log(resultStr)
+})
+
+$("#paintBtn").click(function(e){
+  paint.active = true
+  popup.hide()
+})
+
+/**
+ * 点击编辑按钮，找到图形，并高亮，等待delete删除
+ */
+$("#editBtn").click(function(e){
+  // 关闭绘制工具
+  paint.active = false
+  
+  // 监听点击，并寻找与点碰撞的图形
+  var mapDom = workMap.mapDom
+  $(mapDom).mousedown(function(e){
+    if (paint.active) {
+      return
+    }
+    
+    workMap.flushLightedGeo()
+    popup.hide()
+    currentGeo = null
+    
+    var mapEvent = workMap.coordinateMapping(e)
+    var findGeo = workMap.findPolygonByClickPoint([mapEvent.mapX, mapEvent.mapY])
+    
+    // 高亮显示
+    if (findGeo) {
+      findGeo.light = true
+      currentGeo = findGeo
+      onSelectedEnd()
+    }
+    
+    workMap.refresh()
+  })
+})
+
+/**
+ * 功能删除
+ */
+$(window).keyup(function(evt) {
+  var keyCode = evt.keyCode
+  // delete删除键
+  if (keyCode === 46) {
+    if (currentGeo) {
+      workMap.deletePolygonById(currentGeo.id)
+      popup.hide()
+      workMap.refresh()
+    }
+  }
+  
+  evt.preventDefault()
+})
 
 
 
