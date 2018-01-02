@@ -89,6 +89,7 @@ function init (url, datasource, allGeoDisplay) {
 function drawEnd (e) {
   popup.show()
   currentGeo = e
+  paint.active = false
 }
 
 /**
@@ -104,6 +105,7 @@ function onSubmitEnd (data) {
   }
   
   popup.hide()
+  paint.active = true
 }
 
 /**
@@ -111,7 +113,13 @@ function onSubmitEnd (data) {
  * @param data
  */
 function onCancelEnd () {
+  paint.active = true
+  if (!currentGeo) {
+    return
+  }
   
+  workMap.deletePolygonById(currentGeo.id)
+  workMap.refresh()
 }
 
 /**
@@ -141,6 +149,7 @@ function fillData (collection, datasource, allDisplay) {
       var geo = new MyPolygon()
       geo.setPosition(f.geometry.coordinates)
       geo.display = allDisplay
+      geo.feature = f.properties
       collection.geos.push(geo)
     })
   }
@@ -159,6 +168,11 @@ function resizeCanvas() {
  * 点击后生成json格式数据
  */
 $('#saveBtn').click(function(e){
+  if (popup.popupShow) {
+    alert('正在编辑数据，请点击确认完成！')
+    return
+  }
+  
   var geos = dataCollection.geos
   var resultJson = data.serialize(geos)
   var resultStr = JSON.stringify(resultJson)
@@ -166,6 +180,10 @@ $('#saveBtn').click(function(e){
 })
 
 $("#paintBtn").click(function(e){
+  if (popup.popupShow) {
+    alert('正在编辑数据，请点击确认完成！')
+    return
+  }
   paint.active = true
   popup.hide()
 })
@@ -174,6 +192,11 @@ $("#paintBtn").click(function(e){
  * 点击编辑按钮，找到图形，并高亮，等待delete删除
  */
 $("#editBtn").click(function(e){
+  if (popup.popupShow) {
+    alert('正在编辑数据，请点击确认完成！')
+    return
+  }
+  
   // 关闭绘制工具
   paint.active = false
   

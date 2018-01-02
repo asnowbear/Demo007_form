@@ -71,6 +71,7 @@ Popup.prototype.submit = function() {
 
 Popup.prototype.cancel = function() {
   this.hide()
+  this.onCancelEnd()
 }
 
 Popup.prototype.reset = function () {
@@ -120,8 +121,10 @@ Popup.prototype.fillData = function (model) {
 Popup.prototype.show = function () {
   this.reset()
   this.$popupDiv.show()
+  this.popupShow = true
 }
 
 Popup.prototype.hide = function () {
   this.$popupDiv.hide()
+  this.popupShow = false
 }

@@ -160,6 +160,8 @@
 <script src="src/main_form.js"></script>
 
 <script>
+  // 样例数据
+  var data = '{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"polygon","coordinates":[[575,177],[365,326],[621,432],[755,277],[718,159],[575,177]]},"properties":{"type":"car","subType":"smallcar"}},{"type":"Feature","geometry":{"type":"polygon","coordinates":[[107,176],[317,128],[367,241],[239,287],[132,271],[107,176]]},"properties":{"type":"passerby"}},{"type":"Feature","geometry":{"type":"polygon","coordinates":[[248,430],[183,540],[424,570],[432,414],[357,366],[302,350],[248,430]]},"properties":{"type":"car","subType":"bus"}}]}'
 
   /**
    * 示例数据：
@@ -172,9 +174,9 @@
    * 初始化绘图引擎
    * 如果携带数据源，则会渲染数据
    *
-   *  三种模式：
    */
-  init (url, null)
+  init (url, JSON.parse(data)) // 携带数据
+  // init(url, null)   // 初始标注
 </script>
 
 </html>
